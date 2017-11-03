@@ -10,7 +10,7 @@ namespace ViewModels
 {
     public class BookIssueViewModel
     {
-        public List<SelectListItem> UserID  { get; set; }
+        public List<SelectListItem> UserID { get; set; }
 
         public List<SelectListItem> BookID { get; set; }
         [Required(ErrorMessage = "Please select Issue Date", AllowEmptyStrings = false)]
