@@ -174,6 +174,7 @@ namespace LibraryManagement.BAL
             BookDataManipulation manipulate = new BookDataManipulation();
             ViewShelfViewModel shelf = new ViewShelfViewModel();
             shelf.Category = manipulate.GetCategoryList();
+
             return shelf;
         }
 
