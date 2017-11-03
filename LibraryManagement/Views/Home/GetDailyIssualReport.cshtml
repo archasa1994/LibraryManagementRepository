@@ -1,0 +1,56 @@
+﻿@model ViewModels.DailyIssueReportListViewModel
+
+@{
+    ViewBag.Title = "GetDailyIssualReport";
+}
+
+<h2>Daily Issual Report for @Model.Today</h2>
+
+<div>
+
+    <hr />
+    <table class=" table ">
+        <tr>
+            <th>
+                User ID
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Email ID
+            </th>
+            <th>
+                Book ID
+            </th>
+            <th>
+                Book Name
+            </th>
+        </tr>
+        @foreach (ViewModels.DailyIssueReportViewModel l in Model.dailyIssueList)
+        {
+            <tr>
+                <td>
+                    @l.UserID
+                </td>
+                <td>
+                    @l.UserName
+                </td>
+                <td>
+                    @l.Email
+                </td>
+                <td>
+                    @l.BookID
+                </td>
+                <td>
+                    @l.BookName
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Download as PDF", "GeneratePDF", "Home") &nbsp; &nbsp;
+
+    @Html.ActionLink("Back", "HomePage", "Home")
+</p>

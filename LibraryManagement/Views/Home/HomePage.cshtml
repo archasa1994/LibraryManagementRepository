@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<h2>Welcome @User.Identity.Name</h2><br /><br />
+@if (User.IsInRole("DptHead"))
+{
+    <ul>
+        <li>@Html.ActionLink("Manage Employees", "ManageEmployees", "Home")</li>
+        <li>@Html.ActionLink("Manage Locked Users", "ManageLockedUsers", "Home")</li>
+        <li>@Html.ActionLink("Daily Report", "GetDailyIssualReport", "Home")</li>
+    </ul>
+}
+@if (User.IsInRole("SenLibrarian"))
+{
+    <ul>
+        <li>@Html.ActionLink("Manage Users", "ManageUsers", "Home")</li>
+        <li>@Html.ActionLink("Manage Books", "ManageBooks", "Home")</li>
+        <li>@Html.ActionLink("Manage Category", "ManageCategories", "Home")</li>        
+        <li>@Html.ActionLink("View Shelfs", "ViewShelfs", "Home")</li>
+        <li>@Html.ActionLink("Daily Report", "GetDailyIssualReport")</li>
+        <li>@Html.ActionLink("Calculate Fine", "CalculateFine", "Home")</li>
+        <li>@Html.ActionLink("Send Email", "SendMailToDH", "Home")</li>
+    </ul>
+}
+@if (User.IsInRole("JunLibrarian"))
+{
+    <ul>
+        <li>@Html.ActionLink("Issue Book", "BookIssual", "Home")</li>
+    </ul>
+}
+

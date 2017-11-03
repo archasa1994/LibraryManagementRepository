@@ -1,0 +1,38 @@
+﻿@model ViewModels.CategoryListViewModel
+
+@{
+    ViewBag.Title = "ManageCategories";
+}
+
+<h2>Manage Categories</h2>
+
+<div>
+
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Category ID
+            </th>
+            <th>
+                Category Name
+            </th>
+        </tr>
+        @foreach (ViewModels.CategoryViewModel l in Model.CategoryList)
+        {
+            <tr>
+                <td>
+                    @l.CategoryID
+                </td>
+                <td>
+                    @l.CategoryName
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Back", "HomePage", "Home") &nbsp;&nbsp;&nbsp;
+    @Html.ActionLink("Add New Category", "AddNewCategory", "Home") &nbsp;&nbsp;&nbsp;
+</p>

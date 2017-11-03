@@ -1,0 +1,89 @@
+﻿@model ViewModels.AddNewBookViewModel
+
+@{
+    ViewBag.Title = "Add New Book";
+}
+
+<h2>Add New Book</h2>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    function FillShelfID() {
+        var Value = $("#SelectedCategory").val();
+        $.ajax({
+            url: '/Home/GetShelfList',
+            type: "GET",
+            dataType: "JSON",
+            data: { "ID" : Value },
+            success: function (shelfs) {
+                $("#SelectedShelf").html(""); // clear before appending new list
+                $("#SelectedShelf").append(
+                        $('<option></option>').html("Select Shelf"));
+                $.each(shelfs, function (i, shelf) {                    
+                    $("#SelectedShelf").append(
+                        $('<option></option>').val(shelf.Value).html(shelf.Text));
+                });
+            }
+        });
+    }
+</script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedCategory, Model.CategoryID, "Select Category", new { id = "SelectedCategory", @class = "form-control", @onchange = "FillShelfID()" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShelfID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+            @Html.DropDownListFor(model => model.SelectedShelf,
+           new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                  "Select Shelf",
+                  new { id = "SelectedShelf", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BookName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ManageBooks", "Home")
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")

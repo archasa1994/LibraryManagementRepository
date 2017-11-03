@@ -1,0 +1,38 @@
+﻿@model ViewModels.ShelfListViewModel
+
+<div>
+    <h2>Shelfs</h2>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Category ID
+            </th>
+            <th>
+                Shelf ID
+            </th>
+            <th>
+                Shelf Capacity
+            </th>
+        </tr>
+        @foreach (ViewModels.ShelfViewModel l in Model.ShelfList)
+        {
+            <tr>
+                <td>
+                    @l.CategoryID
+                </td>
+                <td>
+                    @l.ShelfID
+                </td>
+                <td>
+                    @l.ShelfCapacity
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Back", "HomePage", "Home") &nbsp;&nbsp;&nbsp;
+
+    @Html.ActionLink("Add Shelf", "AddNewShelf", "Home")
+</p>

@@ -1,0 +1,46 @@
+﻿@model ViewModels.BookListViewModel
+
+@{
+    ViewBag.Title = "ManageBooks";
+}
+
+<h2>Book Details</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Book ID
+            </th>
+            <th>
+                Book Name
+            </th>
+            <th>
+                Author
+            </th>
+        </tr>
+        @foreach (ViewModels.BookViewModel l in Model.BookList)
+        {
+            <tr>
+                <td>
+                    @l.BookID
+                </td>
+                <td>
+                    @l.BookName
+                </td>
+                <td>
+                    @l.Author
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteBook", "Home", new { bookName = l.BookName, bookID = l.BookID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div><br /><br />
+<p>
+    <span style="float:left"> @Html.ActionLink("Back", "HomePage", "Home")&nbsp;&nbsp;</span>
+    <span style="float:left">@Html.ActionLink("New Book", "AddNewBook", "Home") &nbsp;&nbsp;</span>
+
+</p>
+

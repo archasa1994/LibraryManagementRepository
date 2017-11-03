@@ -1,0 +1,22 @@
+﻿@model ViewModels.ViewShelfViewModel
+
+@{
+    ViewBag.Title = "ViewShelfs";
+}
+
+<h2>ViewShelfs</h2>
+
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedCategory, Model.Category, "Select Category", new { id = "SelectedCategory", @class = "form-control", @onchange = "FillShelfID()" })
+            </div>
+        </div>
+    </div>
+<p>    
+    @Html.ActionLink("Back to List", "HomePage" , "Home")
+</p>

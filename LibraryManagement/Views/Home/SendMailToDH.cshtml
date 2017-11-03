@@ -1,0 +1,52 @@
+﻿@model ViewModels.UserListViewModel
+
+@{
+    ViewBag.Title = "SendMailToDH";
+}
+
+<h2>SendMailToDH</h2>
+
+<div>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                User ID
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Email ID
+            </th>
+            <th>
+                Fine
+            </th>
+        </tr>
+        @foreach (ViewModels.UserViewModel l in Model.UserList)
+        {
+            <tr>
+                <td>
+                    @l.UserID
+                </td>
+                <td>
+                    @l.UserName
+                </td>
+                <td>
+                    @l.Email
+                </td>
+                <td>
+                    @l.Fine
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteUser", "Home", new { userID = l.UserID, userName = l.UserName }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Send Mail", "SendEmail", "Home", new { userID = l.UserID, to = l.Email }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div><br /><br />
+<p>
+    @Html.ActionLink("Back", "HomePage", "Home") &nbsp;&nbsp;&nbsp;

@@ -1,0 +1,102 @@
+﻿@model ViewModels.EmployeeListViewModel
+
+@{
+    ViewBag.Title = "Manage Employees";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+
+    $(function () {
+        $(".anchorDetail").click(function () {
+            debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var name = $buttonClicked.attr('data-name');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: "/Home/DeleteEmployee",
+                contentType: "application/json; charset=utf-8",
+                data: { "employeeID": id , "employeeName" : name},
+                datatype: "json",
+                success: function (data) {
+                    debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+
+        $("#closbtn").click(function () {
+            $('#myModal').modal('hide');
+        });
+    });
+    </script>
+}
+
+
+
+<h2>Manage Employees</h2>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<div>
+
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Employee ID
+            </th>
+            <th>
+                Employee Name
+            </th>
+            <th>
+                Role
+            </th>
+            <th>
+                Email ID
+            </th>
+        </tr>
+        @foreach (ViewModels.EmployeeViewModel l in Model.employeeList)
+        {
+            <tr>
+                <td>
+                    @l.EmployeeID
+                </td>
+                <td>
+                    @l.EmployeeName
+                </td>
+                <td>
+                    @l.Roles
+                </td>
+                <td>
+                    @l.Email
+                </td>
+                <td>
+                    @*@Html.ActionLink("Delete", "DeleteEmployee", "Home", new { employeeID = l.EmployeeID, employeeName = l.EmployeeName , role = l.Roles }, null)*@
+                    <a href="javascript:void(0);" class="anchorDetail" data-id="@l.EmployeeID" data-name="@l.EmployeeName">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div><br /><br />
+<p>
+    @Html.ActionLink("Back to List", "HomePage", "Home") &nbsp;&nbsp;&nbsp;
+    @Html.ActionLink("Add New Employee", "AddNewEmployee", "Home")
+</p>

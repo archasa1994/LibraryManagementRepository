@@ -1,0 +1,49 @@
+﻿@model ViewModels.UserListViewModel
+
+@{
+    ViewBag.Title = "ManageLockedUsers";
+}
+
+<h2>Locked Users</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                User ID
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Email ID
+            </th>
+            <th>
+                Fine
+            </th>
+        </tr>
+        @foreach (ViewModels.UserViewModel l in Model.UserList)
+        {
+            <tr>
+                <td>
+                    @l.UserID
+                </td>
+                <td>
+                    @l.UserName
+                </td>
+                <td>
+                    @l.Email
+                </td>
+                <td>
+                    @l.Fine
+                </td>
+                <td>
+                    @Html.ActionLink("Enable", "UnlockUser", "Home", new { userID = l.UserID, userName = l.UserName }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div><br /><br />
+<p>
+    @Html.ActionLink("Back", "HomePage", "Home") &nbsp;&nbsp;&nbsp;
+</p>

@@ -1,0 +1,80 @@
+﻿@model ViewModels.UserDetailsViewModel
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2>User Details</h2>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fine)
+        </dd>
+    </dl><br /><br />
+    <table class="table table-bordered">        
+        <tr>
+            <td>
+                Book ID
+            </td>
+            <td>
+                Book Name
+            </td>
+            <td>
+                Issue Date
+            </td>
+            <td>
+                Return Date
+            </td>
+            <td>
+                Fine
+            </td>
+        </tr>
+        @foreach (ViewModels.UserBookDetails l in Model.BookList)
+        {
+            <tr>
+                <td>
+                    @l.BookID
+                </td>
+                <td>
+                    @l.BookName
+                </td>
+                <td>
+                    @l.IssueDate
+                </td>
+                <td>
+                    @l.ReturnDate
+                </td>
+                <td>
+                    @l.Fine
+                </td>
+           </tr>            
+        }
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Back to List", "ManageUsers", "Home")
+</p>
